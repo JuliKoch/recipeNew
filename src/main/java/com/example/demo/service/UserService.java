@@ -1,29 +1,46 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.UserExistsException;
+import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class UserService {
+
 
     @Autowired
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User insert(User user)
-    {
-
-        return  userRepository.saveAndFlush(user); //saveAndFlush
+    public User insert(User user) {
+        if(userRepository.findByLogin(user.getLogin())!=null)
+            throw new UserExistsException("User Exists");
+        else
+        {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }
     }
-    //delete id or user?
+
     public void delete(User user)
     {
+        User delUser= userRepository.
+                findById(user.getId()).
+                orElseThrow(IllegalArgumentException::new);
+        userRepository.delete(delUser);
 
-        userRepository.delete(user);
     }
 
     public List<User> find()
@@ -41,9 +58,6 @@ public class UserService {
         return userRepository.findByLogin(name);
     }
 
-    public User findByPassword(String name)
-    {
-        return userRepository.findByPassword(name);
-    }
+
 
 }

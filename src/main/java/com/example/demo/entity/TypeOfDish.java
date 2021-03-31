@@ -6,16 +6,16 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="TypeOfDish",schema = "cookbook")
+@Table(name ="typeofdish",schema = "cookbook")
 @Data
 public class TypeOfDish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column (name ="ID_TypeOfDish")
+    @Column (name ="id_type_of_dish")
     private Integer id;
 
-    @Column (name ="TypeOfDish")
-    private String TypeOfDish;
+    @Column (name ="type_of_dish")
+    private String typeOfDish;
 
 }

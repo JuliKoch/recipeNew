@@ -5,28 +5,28 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="Product",schema = "cookbook")
+@Table(name ="product",schema = "cookbook")
 @Data
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column (name ="ID_List")
+    @Column (name ="id_product")
     private Integer id;
 
     @Column (name ="quantity")
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name ="ID_recipe")
+    @JoinColumn(name ="id_recipe")
     private Recipe recipe;
 
     @ManyToOne
-    @JoinColumn(name ="ID_ingredient")
+    @JoinColumn(name ="id_ingredient")
     private Ingredient ingredient;
 
     @ManyToOne
-    @JoinColumn(name ="ID_Unit")
+    @JoinColumn(name ="id_unit")
     private Unit unit;
 
 }

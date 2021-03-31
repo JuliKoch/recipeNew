@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name ="recipe",schema = "cookbook")
@@ -34,7 +35,7 @@ public class Recipe {
     @Column(name ="carbohydrate")
     private Integer carbohydrate;
 
-    @Column(name ="Value")
+    @Column(name ="value")
     private Integer value;
 
     @Column(name ="url_photo")
@@ -45,8 +46,11 @@ public class Recipe {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name ="ID_TypeOfDish")
+    @JoinColumn(name ="id_type_of_dish")
     private TypeOfDish type;
+
+//    @OneToMany(mappedBy = "recipe")
+//    private List<Product> productList;
 
 
 

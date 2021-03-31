@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New Recipe</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/recipe/new}" th:object="${recipe}">
+    <label for="type">Введите название</label>
+    <input type="text" th:field="*{type}" id="type"/>
+    <br/>
+    <input id="1" type="radio" name ="radio" value="1">
+    <label for="1">Soup</label>
+    <br/>
+    <input id="2" type="radio" name ="radio" value="2">
+    <label for="2">Drink</label>
+    <br/>
+    <label for="user">Введите название</label>
+    <input type="text" th:field="*{user}" id="user"/>
+    <label for="name">Введите название</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <input type="submit" value="create"/>
+</form>
+
+
+</body>
+</html>

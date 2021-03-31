@@ -10,5 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TypeOfDishRepository extends JpaRepository<TypeOfDish,Integer> {
 
+    @Query ("select t from TypeOfDish t where t.typeOfDish=:TypeOfDish")
+    TypeOfDish findByType(@Param("TypeOfDish") String TypeOfDish);
+
+
 
 }
