@@ -15,21 +15,28 @@ import javax.validation.Valid;
 import java.util.List;
 
 
-@Controller
-//@RequestMapping
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    private UserRepository userRepository;
 
 
-    @GetMapping("/login")
-    public String login(Model model)
-    {
-        return "login";
-    }
 
+
+
+
+
+
+
+
+//    @GetMapping("/login")
+//    public String login(Model model)
+//    {
+//        return "login";
+//    }
 
 //    @GetMapping("/registration")
 //    public String registration(Model model) {
@@ -56,7 +63,6 @@ public class UserController {
 //            return "registration";
 //        }
 //        return "redirect:/";
-//
 //   }
 
 //    @PostMapping("/registration")

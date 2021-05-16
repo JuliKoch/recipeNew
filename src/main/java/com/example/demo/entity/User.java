@@ -1,9 +1,12 @@
 package com.example.demo.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,13 +24,20 @@ public class User {
     @Column(name ="Password")
     private String password;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(schema = "cookbook",name="user_role",
-//            joinColumns = {@JoinColumn(name ="ID_User",referencedColumnName = "ID_User")},
-//            inverseJoinColumns = {@JoinColumn(name ="ID_Role",referencedColumnName = "ID_Role")}
-//    )
-//    List<Role> roleList=new ArrayList<>(0);
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(schema = "cookbook",name="user_role",
+            joinColumns = {@JoinColumn(name ="id_user",referencedColumnName = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name ="id_role",referencedColumnName = "id_role")}
+    )
+    private List<Role> roles;
 
+    @LastModifiedDate
+    @Column(name = "updated")
+    private Date updated;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
 
 

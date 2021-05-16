@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,12 +15,15 @@ public class Recipe {
     @Column (name ="ID_Recipe")
     private Integer id_recipe;
 
+    @NotNull
     @Column(name ="name")
     private String name;
 
+    @NotNull
     @Column (name="description")
     private String description;
 
+    @NotNull
     @Column (name ="time")
     private String time;
 
@@ -51,6 +55,17 @@ public class Recipe {
 
 //    @OneToMany(mappedBy = "recipe")
 //    private List<Product> productList;
+
+    public String getOwner()
+    {
+        return user.getLogin();
+    }
+
+    public String getTypeDish()
+    {
+        return type.getTypeOfDish();
+    }
+
 
 
 

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit,Integer> {
-//    @Query("select u from Unit u where u.unit=:unit")
+    @Query("select u from Unit u where u.unit=:unit")
     Unit findByUnit( String unit);
 }

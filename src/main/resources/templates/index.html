@@ -1,16 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Кулинарная книга</title>
+<div class="container">
+    <link rel="stylesheet" href="index.css">
+    <header>
+<!--    <nav>-->
+<!--        <div class="nav__logo">-->
+<!--            <a href="#">Книга рецептов</a>-->
+<!--        </div>-->
+<!--        <div class="nav__elems">-->
+<!--            <input type="text" placeholder="Поиск рецепта" value=""/>-->
+<!--            <a href="/recipe/search" > Поиск </a>-->
+<!--            <a href="recipe/search"> Поиск рецепта по ингредиентам</a>-->
+<!--            <a href="recipe/add"> Добавить рецепт </a>-->
+<!--            <a href="#"> Зарегистрироваться </a>-->
+<!--            <a href="#"> Войти </a>-->
+<!--        </div>-->
+<!--    </nav>-->
+        <nav>
+            <div class="nav__logo">
+                <a href="#">Книга рецептов</a>
+            </div>
+            <div class="nav__elems">
 
-</head>
-<body>
-<h2>Кулинарная книга</h2>
-<div class="nav">
-    <a href="/registration">Регистрация</a>
-    <a href="/Вход">Вход</a>
-    <a href="/recipe">Поиск рецепта</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Поиск по названию</a></li>
+                    <li><a class="dropdown-item" href="#">Поиск по ингредиентам</a></li>
+                    <li><a class="dropdown-item" href="#">Список рецептов</a></li>
+                </ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Поиск
+                    </a>
+                <a href="recipe/add"> Добавить рецепт </a>
+                <a href="#"> Зарегистрироваться </a>
+                <a href="#"> Войти </a>
+            </div>
+        </nav>
+
+
+</header>
+
 </div>
-</body>
-</html>

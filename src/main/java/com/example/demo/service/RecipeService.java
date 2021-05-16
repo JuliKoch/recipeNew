@@ -6,6 +6,7 @@ import com.example.demo.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,16 +21,16 @@ public class RecipeService {
 
         return  recipeRepository.saveAndFlush(recipe); //saveAndFlush
     }
-    //delete id or user?
     public void delete(Recipe recipe)
     {
 
         recipeRepository.delete(recipe);
     }
 
-    public List<Recipe> find()
+    public List<Recipe> find(String name)
     {
-
+        if(name!=null)
+        { return recipeRepository.findAll(name);}
         return recipeRepository.findAll();
     }
 
@@ -39,11 +40,11 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
-    public Recipe findByName (String name)
-    {
-
-        return recipeRepository.findByName(name);
-    }
+//    public List<Recipe> findByName (String name)
+//    {
+//
+//        return recipeRepository.findByName(name);
+//    }
 
     public Recipe findByDescription(String descr)
     {
@@ -86,7 +87,18 @@ public class RecipeService {
         return recipeRepository.findByUrlPhoto(urlPhoto);
     }
 
-    //typeofdish?
 
-    //user?
+    public List<Recipe> findByIngredient(String ingredient)
+    {
+        if(ingredient!=null)
+        { String[] ingredients=ingredient.split(" ");
+        return recipeRepository.findAll(ingredients);}
+        return recipeRepository.findAll();
+    }
+    public String getName(Recipe recipe)
+    {
+        return recipe.getName();
+    }
+
+
 }

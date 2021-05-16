@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe,Integer> {
 
-    @Query("select r from Recipe r where r.name=:name")
-    Recipe findByName(@Param("name") String name );
+//    @Query("select r from Recipe r where r.name=:name")
+//    Recipe findByName(@Param("name") String name );
 
     @Query("select r from Recipe r where r.description=:description")
     Recipe findByDescription(@Param("description") String description );
@@ -43,7 +43,10 @@ public interface RecipeRepository extends JpaRepository<Recipe,Integer> {
     @Query(value = "select r.* from cookbook.recipe r inner join cookbook.product p on r.id_recipe = p.id_recipe\n" +
             "    inner join cookbook.ingredient i on p.id_ingredient = i.id_ingredient\n" +
             "    where i.ingredient in ?1", nativeQuery = true)
-    List<Recipe> findByIngredient( Collection<String> ingredient);
+    List<Recipe> findAll( String[] ingredient);
+
+    @Query(value = "select r.* from cookbook.recipe r where position(lower(?1) in (lower(concat(r.name))))<>0", nativeQuery = true)
+    List<Recipe> findAll( String names);
 
 
 }

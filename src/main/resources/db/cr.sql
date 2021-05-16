@@ -10,8 +10,10 @@ create table cookbook.typeOfDish(
 drop table if exists cookbook.users;
 create table cookbook.users(
                                id_user SERIAL,
-                               Login VARCHAR (32),
-                               Password VARCHAR (32),
+                               Login VARCHAR (32) NOT NULL ,
+                               Password VARCHAR (64) NOT NULL ,
+                               Updated timestamp,
+                               Status varchar(32),
                                PRIMARY KEY (id_user)
 
 );
@@ -35,9 +37,9 @@ create table cookbook.recipe(
                                 id_recipe SERIAL,
                                 id_type_of_dish INTEGER references cookbook.typeOfDish on delete cascade ,
                                 id_user INTEGER references cookbook.users on delete cascade ,
-                                Name varchar(32),
-                                Description text,
-                                Time varchar(20),
+                                Name varchar(32) NOT NULL ,
+                                Description text NOT NULL ,
+                                Time varchar(20) NOT NULL ,
                                 Calorie numeric(4,1),
                                 Protein numeric(3,1),
                                 Fat numeric(3,1),
@@ -85,23 +87,37 @@ insert into cookbook.recipe (id_recipe, id_type_of_dish, id_user) values (1,1,1)
 insert into cookbook.unit values (1,'glass');
 insert into cookbook.ingredient values (1,'apple');
 insert into cookbook.ingredient values (2,'orange');
-insert into cookbook.product values (1,1,1,3,1);
-insert into cookbook.product values (2,1,2,3,1);
+insert into cookbook.product values (3,3,1,3,1);
+insert into cookbook.product values (2,2,2,3,1);
 insert into cookbook.recipe  values (2,1,1);
 insert into cookbook.product values (3,2,1,3,1);
-insert into cookbook.recipe values (2,1,1,'tort', 'kf;lf;','5 min',45,1,1,1,1,'kflf');
+insert into cookbook.recipe values (5,1,1,'tort', 'kf;lf;','5 min',45,1,1,1,1,'kflf');
 insert into cookbook.role  values (1, 'USER');
+insert into cookbook.role  values (2, 'ADMIN');
 insert into cookbook.user_role values (1,1);
-
+update  cookbook.recipe set name='cake' where id_recipe=1;
 select r.*
     from cookbook.recipe r inner join cookbook.product p on r.id_recipe = p.id_recipe
     inner join cookbook.ingredient i on p.id_ingredient = i.id_ingredient
-    where i.ingredient in (lower('Apple'),lower('1'));
+    where i.ingredient in ('orange','apple');
 
 commit ;
 
-select r.name
+select r.*
     from cookbook.recipe r
-    where position(lower('cak') in (lower(concat(r.name))))<>0;
+    where position(lower('t') in (lower(concat(r.name))))<>0;
+
 
 select * from cookbook.recipe;
+select * from cookbook.product;
+select *from cookbook.ingredient;
+
+
+select r.name,r.description, r.time,i.ingredient,u.Unit,p.quantity
+    from cookbook.recipe r inner join cookbook.product p on r.id_recipe=p.id_recipe
+    inner join cookbook.unit u on p.id_unit=u.id_unit
+    inner join cookbook.ingredient i on p.id_ingredient=i.id_ingredient;
+
+
+DELETE FROM cookbook.recipe
+WHERE id_recipe = 1;
