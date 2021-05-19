@@ -91,7 +91,6 @@ public class RecipeController {
 //                         @RequestParam String user,
 //                         @RequestParam String name)
 //    {
-//
 //        Recipe recipe=new Recipe();
 //        recipe.setType(typeOfDishService.findByType(type));
 //        recipe.setUser(userService.findByLogin(user));
