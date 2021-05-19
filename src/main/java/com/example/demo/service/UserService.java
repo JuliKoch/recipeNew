@@ -7,6 +7,10 @@ import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
 
 
     private final UserRepository userRepository;
@@ -70,9 +74,12 @@ public User insert(User user) {
 
     public User findByLogin(String name)
     {
-        return userRepository.findByLogin(name);
+        return userRepository.findByLogin(name).orElseThrow(IllegalArgumentException::new);
     }
 
 
-
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return this.userRepository.findByLogin(s).orElseThrow(()-> new UsernameNotFoundException("Username not found"));
+    }
 }

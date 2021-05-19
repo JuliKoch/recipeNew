@@ -9,8 +9,10 @@ import com.example.demo.entity.User;
 import com.example.demo.service.RecipeService;
 import com.example.demo.service.TypeOfDishService;
 import com.example.demo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 @RequestMapping("/recipe")
 public class RecipeController {
 
@@ -37,7 +40,6 @@ public class RecipeController {
     private RecipeMapper recipeMapper;
 
     @GetMapping("/search/name")
-
     public String searchName( Model model, @Param(value = "name") String name)
     {
         model.addAttribute("recipe",recipeService.find(name));
@@ -45,20 +47,23 @@ public class RecipeController {
     }
 
     @GetMapping("/search/ingredient")
-
-    public String searchIngredient( Model model, @Param(value = "name") String name)
+    public String searchIngredient(Model model,
+                                   @Param(value = "name") String name)
     {
-//        String[] ingredients= ingredient.split(" ");
         model.addAttribute("recipe",recipeService.findByIngredient(name));
         return "recipe/search/ingredient";
     }
 
     @PostMapping("/add")
-    public String addRecipePost(Model model, @Valid RecipeDto recipe)
-    {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public String addRecipePost(Model model,
+                                @Valid RecipeDto recipe,
+                                Principal principal) {
+        recipe.setUser((User) principal);
         recipeService.insert(recipeMapper.toEntity(recipe)); 
         return "redirect:/recipe";
     }
+
     @GetMapping("/add")
     public String addRecipeGet(Model model, RecipeDto recipe){
         model.addAttribute("recipe", recipe);
