@@ -78,9 +78,6 @@ public class RecipeController {
 //    }
 
 
-
-//    private Recipe recipe;
-
 //    @GetMapping("recipe/new")
 //    public String newRecipe(Model model)
 //    {
