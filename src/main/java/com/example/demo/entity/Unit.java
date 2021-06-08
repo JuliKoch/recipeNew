@@ -14,6 +14,6 @@ public class Unit {
     @Column (name ="ID_Unit")
     private Integer id;
 
-    @Column (name ="unit")
+    @Column(name ="unit")
     private String unit;
 }

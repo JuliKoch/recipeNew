@@ -1,5 +1,4 @@
 package com.example.demo.service;
-
 import com.example.demo.entity.Favorite;
 import com.example.demo.entity.Recipe;
 import com.example.demo.entity.User;

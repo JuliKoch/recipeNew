@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+
 import com.example.demo.entity.Favorite;
 import com.example.demo.entity.Ingredient;
 import com.example.demo.entity.User;

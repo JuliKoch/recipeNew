@@ -13,7 +13,7 @@ import java.util.Optional;
 public class IngredientService {
 
     @Autowired
-   private IngredientRepository ingredientRepository;
+    private IngredientRepository ingredientRepository;
 
     public Ingredient insert(Ingredient ingredient)
     {
@@ -24,7 +24,7 @@ public class IngredientService {
     public void delete(Ingredient ingredient)
     {
 
-      ingredientRepository.delete(ingredient);
+        ingredientRepository.delete(ingredient);
     }
 
     public List<Ingredient> find()
@@ -46,4 +46,3 @@ public class IngredientService {
 
 
 }
-

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>All Film</title>
+</head>
+<body>
+
+<h1>Рецепты</h1>
+<a th:href="@{/recipe/search/name}">Поиск по названию</a>
+<a th:href="@{/recipe/search/ingredient}">Поиск по ингредиентам</a>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Вид блюда</th>
+        <th>Описание приготовления</th>
+        <th>Время приготовления</th>
+        <th>Белки</th>
+        <th>Жиры</th>
+        <th>Углеводы</th>
+        <th>Калории</th>
+        <th>Питательность</th>
+        <th>Автор</th>
+
+    </tr>
+
+    <p th:each="el : ${recipe}">
+        <tr>
+            <td th:text="${el.getName()}"></td>
+            <td th:text="${el.getTypeDish()}"></td>
+            <td th:text="${el.getDescription()}"></td>
+            <td th:text="${el.getTime()}"></td>
+            <td th:text="${el.getProtein()}"></td>
+            <td th:text="${el.getFat()}"></td>
+            <td th:text="${el.getCarbohydrate()}"></td>
+            <td th:text="${el.getCalorie()}"></td>
+            <td th:text="${el.getValue()}"></td>
+            <td th:text="${el.getOwner()}"></td>
+<!--            <td><a th:href="@{/film/{id}(id=${el.getID()})}" th:text="${el.getName()}"></a></td>-->
+<!--            <td> <a th:href="@{film/{id}/edit (id=${el.getID()}) }">Edit</a> </td>-->
+        </tr>
+    </p>
+</table>
+
+<br/>
+<!--<a th:href="@{/film/new}">Create New Film</a>-->
+
+</body>
+</html>

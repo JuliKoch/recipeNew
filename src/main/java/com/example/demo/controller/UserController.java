@@ -1,28 +1,58 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Unit;
+import com.example.demo.dto.UserDto;
+import com.example.demo.dto.mapper.UserMapper;
+;
 import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UnitService;
+import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserMapper userMapper;
 
+    @Autowired
+    private RoleService roleService;
+    @GetMapping("/registration")
+    public String showRegistrationForm(Model model,UserDto user) {
+        model.addAttribute("user", user);
+        return "user/registration";
+    }
+
+
+    @PostMapping("/registration")
+    public String addUser(Model model, @Valid UserDto user,
+                          BindingResult result) {
+        Optional<User> existing = userService.findByLogin(user.getLogin());
+        if (existing != null) {
+            result.rejectValue("login", null, "Пользователь с таким логином уже существует");
+        }
+//            if (result.hasErrors()) {
+//                return "user/registration";
+//            }
+            userService.insert(userMapper.toEntity(user));
+            return "redirect:/";
+        }
+
+    }
 
 
 
@@ -85,4 +115,3 @@ public class UserController {
 //        }
 //        return "redirect:/";
 //   }
-}

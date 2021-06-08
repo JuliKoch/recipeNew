@@ -11,6 +11,7 @@ import com.example.demo.service.TypeOfDishService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,15 +49,18 @@ public class RecipeController {
 
     public String searchIngredient( Model model, @Param(value = "name") String name)
     {
-//        String[] ingredients= ingredient.split(" ");
+
         model.addAttribute("recipe",recipeService.findByIngredient(name));
         return "recipe/search/ingredient";
     }
 
     @PostMapping("/add")
-    public String addRecipePost(Model model, @Valid RecipeDto recipe)
-    {
-        recipeService.insert(recipeMapper.toEntity(recipe)); 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public String addRecipePost(
+                                @Valid RecipeDto recipe,
+                                Principal principal) {
+        recipe.setUser((User) principal);
+        recipeService.insert(recipeMapper.toEntity(recipe));
         return "redirect:/recipe";
     }
     @GetMapping("/add")
