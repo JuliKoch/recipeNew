@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
 
+
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.dto.mapper.RecipeMapper;
-import com.example.demo.entity.Recipe;
-import com.example.demo.entity.TypeOfDish;
-import com.example.demo.entity.User;
-import com.example.demo.service.RecipeService;
-import com.example.demo.service.TypeOfDishService;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.*;
+import com.example.demo.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,10 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/recipe")
@@ -35,7 +29,16 @@ public class RecipeController {
     private TypeOfDishService typeOfDishService;
 
     @Autowired
+    private UnitService unitService;
+
+    @Autowired
+    private ProductService productService;
+    @Autowired
     private RecipeMapper recipeMapper;
+
+    @Autowired
+    private IngredientService ingredientService;
+
 
     @GetMapping("/search/name")
 
@@ -57,59 +60,34 @@ public class RecipeController {
     @PostMapping("/add")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String addRecipePost(
-                                @Valid RecipeDto recipe,
-                                Principal principal) {
+            @Valid RecipeDto recipe,
+            Principal principal) {
+
         recipe.setUser((User) principal);
         recipeService.insert(recipeMapper.toEntity(recipe));
+
+//        ingredientService.insert(ingredient);
+//            products.setIngredient(ingredient);
+//            products.setRecipe(recipeMapper.toEntity(recipe));
+//
+//            productService.insert(products);
         return "redirect:/recipe";
     }
+
     @GetMapping("/add")
-    public String addRecipeGet(Model model, RecipeDto recipe){
+    public String addRecipeGet(Model model, RecipeDto recipe,
+                               Ingredient ingredient){
         model.addAttribute("recipe", recipe);
-        model.addAttribute("typeOfDish",typeOfDishService.find());
+        model.addAttribute("type",typeOfDishService.find());
+        model.addAttribute("unit",unitService.find());
+       // model.addAttribute("products",products);
+
+        model.addAttribute("ingredient", ingredient);
         return "/recipe/add";
     }
-//
-//    @GetMapping("/search")
-//    public List<Recipe> search()
-//    {
-//        return recipeService.find();
-//    }
+
+    }
 
 
 
-//    private Recipe recipe;
 
-//    @GetMapping("recipe/new")
-//    public String newRecipe(Model model)
-//    {
-//        return "recipe/new";
-//    }
-//    @PostMapping("recipe")
-//    public String create(@RequestParam String type,
-//                         @RequestParam String user,
-//                         @RequestParam String name)
-//    {
-//
-//        Recipe recipe=new Recipe();
-//        recipe.setType(typeOfDishService.findByType(type));
-//        recipe.setUser(userService.findByLogin(user));
-//        recipe.setName(name);
-//        recipeService.insert(recipe);
-//        return "redirect:/recipe";
-//    }
-//    @PostMapping("/recipe/new")
-//    public String add(Recipe recipe) {
-//        recipeService.insert(recipe);
-//        return  "redirect:/";
-//    }
-//    @GetMapping("/recipe")
-//    public String get1()
-//    {
-//
-//        return "recipe";
-//    }
-
-
-
-}

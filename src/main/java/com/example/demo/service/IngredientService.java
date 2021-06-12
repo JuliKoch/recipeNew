@@ -17,10 +17,8 @@ public class IngredientService {
 
     public Ingredient insert(Ingredient ingredient)
     {
-
-        return  ingredientRepository.saveAndFlush(ingredient); //saveAndFlush
+        return  ingredientRepository.saveAndFlush(ingredient);
     }
-    //delete id or user?
     public void delete(Ingredient ingredient)
     {
 

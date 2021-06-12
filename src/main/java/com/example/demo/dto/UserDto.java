@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+
 public class UserDto {
 
 

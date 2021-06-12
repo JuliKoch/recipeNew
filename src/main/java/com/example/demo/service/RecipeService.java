@@ -18,12 +18,10 @@ public class RecipeService {
 
     public Recipe insert(Recipe recipe)
     {
-
-        return  recipeRepository.saveAndFlush(recipe); //saveAndFlush
+        return  recipeRepository.saveAndFlush(recipe);
     }
     public void delete(Recipe recipe)
     {
-
         recipeRepository.delete(recipe);
     }
 

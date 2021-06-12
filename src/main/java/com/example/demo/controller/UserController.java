@@ -14,8 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 
 
@@ -31,28 +29,28 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
     @GetMapping("/registration")
-    public String showRegistrationForm(Model model,UserDto user) {
+    public String showRegistrationForm(Model model, UserDto user) {
         model.addAttribute("user", user);
         return "user/registration";
     }
 
 
     @PostMapping("/registration")
-    public String addUser(Model model, @Valid UserDto user,
+    public String addUser(Model model,@Valid UserDto user,
                           BindingResult result) {
-        Optional<User> existing = userService.findByLogin(user.getLogin());
-        if (existing != null) {
-            result.rejectValue("login", null, "Пользователь с таким логином уже существует");
-        }
-//            if (result.hasErrors()) {
-//                return "user/registration";
-//            }
+        Optional<User> existing = userService.findByLogin(userMapper.toEntity(user).getLogin());
+        if (existing.isPresent())
+            result.rejectValue("login",null, "Такой пользователь существует!");
+        if (result.hasErrors())
+            return "user/error";
             userService.insert(userMapper.toEntity(user));
-            return "redirect:/";
+            return "redirect:/user/registration?success";
         }
 
-    }
+
+}
 
 
 

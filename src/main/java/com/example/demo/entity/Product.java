@@ -17,7 +17,7 @@ public class Product {
     @Column (name ="quantity")
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name ="id_recipe")
     private Recipe recipe;
 
