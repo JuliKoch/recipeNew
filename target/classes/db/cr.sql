@@ -112,9 +112,9 @@ select * from cookbook.recipe;
 select * from cookbook.product;
 select *from cookbook.ingredient;
 select *from cookbook.users;
-
+select *from cookbook.unit;
 select *from cookbook.role;
-
+select *from cookbook.typeOfDish;
 select r.name,r.description, r.time,i.ingredient,u.Unit,p.quantity
     from cookbook.recipe r inner join cookbook.product p on r.id_recipe=p.id_recipe
     inner join cookbook.unit u on p.id_unit=u.id_unit
