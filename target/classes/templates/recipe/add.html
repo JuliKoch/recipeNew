@@ -1,4 +1,88 @@
 
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Добавить рецепт</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/recipe/add.css}"/>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form th:method="POST" th:action="@{/recipe/add}" >-->
+
+<!--    <label for="name">Название <em>*</em></label>-->
+<!--    <input type="text" th:field="${recipe.name}" id="name"/>-->
+<!--    <br/>-->
+
+<!--    <label for="description">Описание приготовления *</label>-->
+<!--    <textarea type="text" th:field="${recipe.description}" id="description"/>-->
+<!--    <br/>-->
+
+<!--    <label for="time">Время приготовления *</label>-->
+<!--    <input type="text" th:field="${recipe.time}" id="time"/>-->
+<!--    <br/>-->
+
+<!--    <label for="calorie">Калории</label>-->
+<!--    <input type="text" th:field="${recipe.calorie}" id="calorie"/>-->
+<!--    <br/>-->
+
+<!--    <label for="protein">Белки</label>-->
+<!--    <input type="text" th:field="${recipe.protein}" id="protein"/>-->
+<!--    <br/>-->
+
+<!--    <label for="fat">Жиры</label>-->
+<!--    <input type="text" th:field="${recipe.fat}" id="fat"/>-->
+<!--    <br/>-->
+
+<!--    <label for="carbohydrate">Углеводы</label>-->
+<!--    <input type="text" th:field="${recipe.carbohydrate}" id="carbohydrate"/>-->
+<!--    <br/>-->
+
+<!--    <label for="value">Питательность</label>-->
+<!--    <input type="value" th:field="${recipe.value}" id="value"/>-->
+<!--    <br/>-->
+
+<!--    <label>Вид блюда</label>-->
+
+<!--        <select th:field="${recipe.type}">-->
+<!--            <option th:each="type: ${type}" th:value="${type.id}" th:text="${type.typeOfDish}"></option>-->
+<!--        </select>-->
+<!--    <div class="ingredient" >-->
+<!--        <div class="ingredient-main">-->
+<!--            <th:block th:each:="product : ${products}">-->
+<!--            <div class="elem__form" >-->
+<!--                <label>Ингредиент</label>-->
+<!--                <input type="text" th:field="${product.ingredient.ingredient}" />-->
+<!--<-->
+<!--            </div>-->
+<!--            <div class="elem__form">-->
+<!--                <label>Количество</label>-->
+<!--                <input type="number" th:field="${product.quantity}"/>-->
+<!--            </div>-->
+<!--            <div class="elem__form">-->
+<!--                <label>Мера веса/объема</label>-->
+<!--                <select th:field="${product.unit}">-->
+<!--                    <option th:each="unit: ${unit}" th:value="${unit.id}" th:text="${unit.unit}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            </th:block>-->
+<!--        </div>-->
+<!--        <div class="manipulation">-->
+<!--            <button type="button">Добавить еще +</button>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    <br/>-->
+
+<!--    <input type="submit" value="Добавить"/>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,13 +130,15 @@
         <select th:field="${recipe.type}">
             <option th:each="type: ${type}" th:value="${type.id}" th:text="${type.typeOfDish}"></option>
         </select>
+
+
     <div class="ingredient" >
         <div class="ingredient-main">
             <th:block th:each:="product : ${products}">
             <div class="elem__form" >
                 <label>Ингредиент</label>
                 <input type="text" th:field="${product.ingredient.ingredient}" />
-<
+
             </div>
             <div class="elem__form">
                 <label>Количество</label>
