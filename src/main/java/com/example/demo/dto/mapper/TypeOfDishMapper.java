@@ -1,4 +1,4 @@
 package com.example.demo.dto.mapper;
 
-public interface RecipeMapper {
+public class TypeOfDishMapper {
 }

@@ -61,26 +61,26 @@ public class RecipeController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String addRecipePost(
             @Valid RecipeDto recipe,
-            Principal principal) {
+            Principal principal,Product product,Ingredient ingredient) {
 
         recipe.setUser((User) principal);
         recipeService.insert(recipeMapper.toEntity(recipe));
 
-//        ingredientService.insert(ingredient);
-//            products.setIngredient(ingredient);
-//            products.setRecipe(recipeMapper.toEntity(recipe));
-//
-//            productService.insert(products);
+        ingredientService.insert(ingredient);
+            product.setIngredient(ingredient);
+            product.setRecipe(recipeMapper.toEntity(recipe));
+
+            productService.insert(product);
         return "redirect:/recipe";
     }
 
     @GetMapping("/add")
     public String addRecipeGet(Model model, RecipeDto recipe,
-                               Ingredient ingredient){
+                               Ingredient ingredient,Product product){
         model.addAttribute("recipe", recipe);
         model.addAttribute("type",typeOfDishService.find());
         model.addAttribute("unit",unitService.find());
-       // model.addAttribute("products",products);
+        model.addAttribute("products",product);
 
         model.addAttribute("ingredient", ingredient);
         return "/recipe/add";

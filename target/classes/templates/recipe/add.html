@@ -134,7 +134,6 @@
 
     <div class="ingredient" >
         <div class="ingredient-main">
-            <th:block th:each:="product : ${products}">
             <div class="elem__form" >
                 <label>Ингредиент</label>
                 <input type="text" th:field="${product.ingredient.ingredient}" />
@@ -150,7 +149,6 @@
                     <option th:each="unit: ${unit}" th:value="${unit.id}" th:text="${unit.unit}"></option>
                 </select>
             </div>
-            </th:block>
         </div>
         <div class="manipulation">
             <button type="button">Добавить еще +</button>

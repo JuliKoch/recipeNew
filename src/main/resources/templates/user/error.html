@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Ошибка</h5>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+            <p>Пользователь с таким именем уже существует!</p>
+            <p class="text-secondary"><small>Если вы уже регистрировались, то нажмите кнопку "Войти",
+                иначе выполните заново регистрацию с другим логином!</small></p>
+        </div>
+        <div class="modal-footer">
+<!--            <form action="/login" >-->
+<!--                <button type="submit">Войти</button>-->
+<!--            </form>-->
+<!--            <form action="/user/registration">-->
+<!--                <button type="submit">Зарегистрироваться</button>-->
+<!--            </form>-->
+            <a href="/login">Войти</a>
+            <a href="/user/registration">Зарегистрироваться</a>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
+</body>
+
+</html>
